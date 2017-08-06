@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>A-Frame demonstrations</title>
+
+  <meta name="description" content="VR/AR demonstrations using A-Frame" />
+  <meta name="author" content="Craig Buckler" />
+
+  <meta name="viewport" content="width=device-width,shrink-to-fit=no,user-scalable=yes,initial-scale=1,minimum-scale=1,minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <script src="/js/aframe.min.js"></script>
+  <script src="/js/demo.js"></script>
+</head>
+<body>
+
+  <a-scene>
+
+    <a-assets>
+      <img id="sky" src="images/sky.jpg">
+      <img id="stone" src="images/stone.jpg" />
+      <img id="marble" src="images/marble.jpg" />
+    </a-assets>
+
+    <a-sky src="#sky" theta-length="90" radius="30"></a-sky>
+
+    <a-plane src="#marble" rotation="-90 0 0" width="60" height="60"></a-plane>
+
+    <a-box id="box" src="#stone" position="2 1 -5" rotation="0 0 0" scale="2 2 2">
+
+      <a-sphere color="#555" position="0 1 0" scale="0.5 0.5 0.5" onover-scale="to: 0.6 0.6 0.6">
+        <a-animation attribute="position" to="0 1.1 0" direction="alternate" dur="2000" repeat="indefinite"></a-animation>
+      </a-sphere>
+
+      <a-text value="Hello!" color="#fff" position="-0.5 0 0.5" scale="1.5 1.5 1.5"></a-text>
+
+    </a-box>
+
+    <a-light type="ambient" color="#455"></a-light>
+    <a-light type="point" intensity="1" position="0 5 5"></a-light>
+
+    <a-camera id="camera-free">
+      <a-cursor color="red"></a-cursor>
+    </a-camera>
+
+    <a-entity id="camera-fixed" camera="userHeight: 1.6">
+      <a-animation id="camera-move" attribute="position" begin="move" to="2 1.6 0" direction="normal" dur="2000" repeat="0"></a-animation>
+    </a-entity>
+
+  </a-scene>
+
+</body>
+</html>
