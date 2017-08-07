@@ -4,16 +4,43 @@
 const
   slide = [
 
+    /*
+    {
+      title:  '',
+      body:   '',
+      foot:   '',
+      image:  ''
+    },
+    */
+
     {
       title:  'Raise your VR A-game\nwith A-Frame',
-      body:   'TechExeter 2017',
+      body:   'TechExeter 2017\ngithub.com',
       foot:   'Craig Buckler, @craigbuckler'
     },
 
     {
-      title:  'Who\'s excited?!',
-      body:   'Virtual Reality and\nAugemented Reality:\non the cusp of\nmainstream adoption',
-      foot:   'Craig Buckler, @craigbuckler'
+      body:  'Who\'s excited by VR and AR?'
+    },
+
+    {
+      body:   'VR and AR combine the\ntoughest challenges in IT...'
+    },
+
+    {
+      body:   '1. Keeping up with\nnew technologies'
+    },
+
+    {
+      body:   '2. Dealing with users'
+    },
+
+    {
+      body:   '3. Amalgamating challenges\n1 & 2 into a 20-minute\npresentation'
+    },
+
+    {
+      body:   'Virtual Reality and\nAugemented Reality\nare on the cusp of\nmainstream adoption',
     },
 
     {
@@ -22,27 +49,86 @@ const
     },
 
     {
-      title:  'Slide 4',
-      body:   'Some other stuff',
-      foot:   'Another footer'
+      title:  'Problem 1: who owns...',
+      body:   'Oculus Rift\nPlaystation VR\nSamsung Gear VR\nHTC Vive\nGoogle Daydream\nGoogle Cardboard'
+    },
+
+    {
+      title:  'User issues:',
+      body:   'over-hyped\nexpensive\nnot selling well\nlittle content\nimpractical'
+    },
+
+    {
+      title:  '',
+      body:   'games\nvideo\neducation / training\nmeetings\ndata visualisation\nresearch\ne-commerce',
+      foot:   '',
+      image:  ''
+    },
+
+    {
+      title:  'and, ahem...',
+      body:   '\nadult entertainment'
+    },
+
+    {
+      title:  'Development issues:',
+      body:   'it\'s difficult\ndevice fragmentation\ndifferent APIs\nclosed platforms\nbastard AppStores\nnon-VR users',
+      foot:   ''
+    },
+
+    {
+      title:  'What we need...',
+      body:   'an open platform which can\ndeliver VR content to anyone\nusing any device\nregardless of the hardware'
+    },
+
+    {
+      body:   'THE WEB'
+    },
+
+    {
+      title:  'Browser APIs',
+      body:   '1. WebGL\n2. WebVR'
+    },
+
+    {
+      body:   'It\'s still too hard!'
+    },
+
+    {
+      title:  'device-agnostic VR library',
+      foot:   'https://aframe.io/',
+      image:  'aframe'
+    },
+
+    {
+      title:  'A-Frame benefits',
+      body:   'easy to use\nHTML and JavaScript\ncomponent-based\neasy to extend\nvery fast\nsmall payload\nworks everywhere',
+      foot:   'https://aframe.io/'
+    },
+
+    {
+      title:  '',
+      body:   'demonstrations',
+      foot:   '',
+      image:  ''
     }
 
   ],
 
   view = {
-    boxZ:     -5,
-    camY:     1.6,
-    camZ:     -3
+    boxZ:     -5,     // first slide Z co-ordinate (minus = further away)
+    camY:     1.6,    // camera height
+    camZ:     -3      // first slide camera Z co-ordinate
   },
 
   box = {
-    width:    4,
-    height:   3,
-    depth:    0.1,
-    maxX:     3,
-    gapX:     1,
-    gapZ:     4,
-    color:    '#222'
+    width:    4,      // slide width (meters)
+    height:   3,      // slide height
+    depth:    0.1,    // slide depth
+    maxX:     5,      // maximum number of slides in horizontal X-axis
+    gapX:     1,      // horizontal gap between slides
+    gapZ:     4,      // distance between rows of slides
+    color:    '#222'  // slide color
   },
 
   text = {
@@ -52,7 +138,8 @@ const
       align:    'left',
       baseline: 'top',
       position: '-1.8 1.3 0.1',
-      scale:    '1.2 1.2 1.2'
+      scale:    '1.2 1.2 1.2',
+      color:    '#999',
     },
     body: {
       align:    'center',
@@ -65,12 +152,24 @@ const
       position: '1.8 -1.3 0.1',
       scale:    '0.7 0.7 0.7',
       color:    '#aaa'
+    },
+    slide: {
+      align:    'left',
+      baseline: 'bottom',
+      position: '-1.8 -1.3 0.1',
+      scale:    '0.4 0.4 0.4',
+      color:    '#666'
     }
+  },
+
+  image = {
+    maxWidth:   0.6 * box.width,
+    maxHeight:  0.6 * box.height
   };
 
+
+// start
 let scene;
-
-
 window.addEventListener('load', () => {
 
   scene = document.getElementsByTagName('a-scene')[0];
@@ -104,8 +203,18 @@ function makeSlides() {
     se.setAttribute('color', box.color);
     se.setAttribute('position', `${x} ${box.height / 2} ${z}`);
 
+    // slide number
+    let sp = se.appendChild(document.createElement('a-text'));
+    sp.setAttribute('value', s+1);
+    sp.setAttribute('font', text.font);
+    for (let tp in text.slide) {
+      sp.setAttribute(tp, text.slide[tp]);
+    }
+
     // slide text
     for (let t in slide[s]) {
+
+      if (!slide[s][t]) continue;
 
       if (text[t]) {
 
@@ -132,14 +241,12 @@ function makeSlides() {
 
           let
             si = se.appendChild(document.createElement('a-image')),
-            iPx = Math.max(img.width, img.height);
+            iScale = Math.min(image.maxWidth / img.width, image.maxHeight / img.height);
 
           si.setAttribute('position', `0 0 ${box.depth * 3}`);
           si.setAttribute('src', '#' + slide[s][t]);
-          si.setAttribute('width', 2);
-          si.setAttribute('height', 1.06);
-
-          // TODO calculate w x h based on N% of slide dimensions
+          si.setAttribute('width', img.width * iScale);
+          si.setAttribute('height', img.height * iScale);
 
         }
 
@@ -159,26 +266,42 @@ function makeSlides() {
 function cameraMove() {
 
   let
-    move = 0,
+    move = (parseInt(location.hash.slice(1),10) || 1) - 1, // current slide
     minX = (box.width / 2) - (box.maxX * (box.width + box.gapX) - box.gapX) / 2,
     cameraFree = document.getElementById('camera-free'),
     cameraFixed = document.getElementById('camera-fixed'),
-    cameraMove = document.createElement('a-animation');
+    cameraMove = document.createElement('a-animation'),
+    activeFree = true;
 
   cameraMove.setAttribute('attribute', 'position');
   cameraMove.setAttribute('direction', 'normal');
   cameraMove.setAttribute('duration', 2000);
   cameraMove.setAttribute('repeat', 0);
 
-  document.addEventListener('keypress', (e) => {
+  document.addEventListener('keypress', keyHandler);
+
+  // activate fixed camera
+  keyHandler({ key:'c' });
+
+  // keypress handler
+  function keyHandler(e) {
 
     let key = e.key;
-    if (!(key === '.' || key === ',' || key === '\\')) return;
+    if (!(key === 'z' || key === 'x' || key === 'c')) return;
+
+    // switch cameras
+    let fixedSwitch = false;
+    if (key === 'c') {
+      if (activeFree) cameraFixed.setAttribute('camera', 'active', 1);
+      else cameraFree.setAttribute('camera', 'active', 1);
+      fixedSwitch = activeFree;
+      activeFree = !activeFree;
+    }
 
     let oldMove = move;
-    move += key === ',' ? -1 : key == '.' ? 1 : 0;
+    if (!activeFree) move += key === 'z' ? -1 : key == 'x' ? 1 : 0;
 
-    if (move !== oldMove) {
+    if (fixedSwitch || move !== oldMove) {
 
       // return to first or last slide
       if (move >= slide.length) move = 0;
@@ -190,16 +313,16 @@ function cameraMove() {
       // add new camera animation
       cameraMove.setAttribute('from', vPos(oldMove));
       cameraMove.setAttribute('to', vPos(move));
-      cameraFixed.setAttribute('camera', 'active', 1);
+
       cameraFixed.appendChild(cameraMove);
 
+      // update URL
+      history.pushState({}, 'slide ' + move, '#' + (move + 1));
+
     }
 
-    if (key === '\\') {
-      cameraFree.setAttribute('camera', 'active', 1);
-    }
+  }
 
-  });
 
   // calculate X Y Z position
   function vPos(s) {

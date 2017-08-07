@@ -15,13 +15,29 @@
 </head>
 <body>
 
+  <!--
+    A-Frame presentation system
+    By Craig Buckler
+
+    browser controls:
+
+      Z - previous slide
+      X - next slide
+      C - toggle slide/roaming mode
+
+    when roaming, use the mouse and cursors/WASD
+    or strap on a VR headset!
+  -->
+
   <a-scene fog="type: exponential; color: #111; density: 0.05;">
 
     <a-assets>
       <img id="sky" src="images/sky.jpg">
       <img id="stone" src="images/stone.jpg" />
       <img id="marble" src="images/marble.jpg" />
+
       <img id="old-vr" src="images/old-vr.png" />
+      <img id="aframe" src="images/aframe.png" />
     </a-assets>
 
     <a-sky src="#sky" theta-length="90" radius="30"></a-sky>
