@@ -240,3 +240,25 @@ we can switch back to an interactive camera and walk around
 
 
 ## exeter.html
+So let's look at a really basic example.
+
+I downloaded this 360 degree image of a famous Exeter landmark from Flickr.
+
+So the first thing we need is the A-frame library.
+That must go in the HTML head.
+
+We then require a single <a-scene> tag in our body.
+A-frame uses the whole browser screen although you can use it in an iframe.
+
+Next, we'll define the image within A-frames asset management system.
+This allows A-frame to pre-load and cache assets for better performance.
+
+Next, we can use the <a-sky> entity. This adds a background to our scene.
+It's effectively a sphere with a colour or image mapped onto it.
+
+Now this would work without any other code, but I'm going to add a camera control.
+This will allow the user to look around but not move their position because that would go a little weird.
+
+And that's it!
+Open this in a browser and we can look around.
+Open it on a VR device and you get the full immersive experience.
