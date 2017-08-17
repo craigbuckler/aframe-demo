@@ -15,8 +15,8 @@ const
 
     {
       title:  'Raise your VR A-game\nwith A-Frame',
-      body:   'TechExeter 2017\ngithub.com',
-      foot:   'Craig Buckler, @craigbuckler'
+      body:   'TechExeter 2017\nCraig Buckler\n@craigbuckler',
+      foot:   'github.com/craigbuckler/aframe-demo'
     },
 
     {
@@ -36,7 +36,7 @@ const
     },
 
     {
-      body:   '3. Amalgamating challenges\n1 & 2 into a 20-minute\npresentation'
+      body:   '3. Solving challenges\n1 & 2 in a 20-minute\npresentation'
     },
 
     {
@@ -49,8 +49,38 @@ const
     },
 
     {
-      title:  'Problem 1: who owns...',
-      body:   'Oculus Rift\nPlaystation VR\nSamsung Gear VR\nHTC Vive\nGoogle Daydream\nGoogle Cardboard'
+      title:  'First problem',
+      body:   'who owns...'
+    },
+
+    {
+      title:  'Oculus Rift',
+      image:  'oculus-rift'
+    },
+
+    {
+      title:  'Playstation VR',
+      image:  'playstation-vr'
+    },
+
+    {
+      title:  'Samsung Gear VR',
+      image:  'samsung-vr'
+    },
+
+    {
+      title:  'HTC Vive',
+      image:  'htc-vive'
+    },
+
+    {
+      title:  'Google Daydream',
+      image:  'google-daydream'
+    },
+
+    {
+      title:  'Google Cardboard',
+      image:  'google-cardboard'
     },
 
     {
@@ -59,7 +89,7 @@ const
     },
 
     {
-      title:  '',
+      title:  'but it\'s still great technology...',
       body:   'games\nvideo\neducation / training\nmeetings\ndata visualisation\nresearch\ne-commerce',
       foot:   '',
       image:  ''
@@ -72,7 +102,7 @@ const
 
     {
       title:  'Development issues:',
-      body:   'it\'s difficult\ndevice fragmentation\ndifferent APIs\nclosed platforms\nbastard AppStores\nnon-VR users',
+      body:   'it\'s difficult\ndevice fragmentation\ndifferent APIs\nclosed platforms\n****ing AppStores\nnon-VR users',
       foot:   ''
     },
 
@@ -91,7 +121,7 @@ const
     },
 
     {
-      body:   'It\'s still too hard!'
+      body:   'it\'s still too difficult!'
     },
 
     {
@@ -107,10 +137,8 @@ const
     },
 
     {
-      title:  '',
-      body:   'demonstrations',
-      foot:   '',
-      image:  ''
+      title:  'Demonstration',
+      body:   'You\'re looking at one!\n*** URL-TO-GO-HERE ***'
     }
 
   ],
@@ -165,6 +193,14 @@ const
   image = {
     maxWidth:   0.6 * box.width,
     maxHeight:  0.6 * box.height
+  },
+
+
+  slideNav = {
+    switchCam: ['c', 'C', 'Enter', 'Tab', 'Escape'],
+    back: ['z', 'Z', 'a', 'A', 'w', 'W', ',', 'ArrowLeft', 'ArrowUp', 'PageUp'],
+    next: ['x', 'X,', 'd', 'D', 's', 'S', '.', 'ArrowRight', 'ArrowDown', 'PageDown'],
+    home: ['Home']
   };
 
 
@@ -278,7 +314,7 @@ function cameraMove() {
   cameraMove.setAttribute('duration', 2000);
   cameraMove.setAttribute('repeat', 0);
 
-  document.addEventListener('keypress', keyHandler);
+  document.addEventListener('keyup', keyHandler);
 
   // activate fixed camera
   keyHandler({ key:'c' });
@@ -287,11 +323,10 @@ function cameraMove() {
   function keyHandler(e) {
 
     let key = e.key;
-    if (!(key === 'z' || key === 'x' || key === 'c')) return;
 
     // switch cameras
     let fixedSwitch = false;
-    if (key === 'c') {
+    if (slideNav.switchCam.indexOf(key) >= 0) {
       if (activeFree) cameraFixed.setAttribute('camera', 'active', 1);
       else cameraFree.setAttribute('camera', 'active', 1);
       fixedSwitch = activeFree;
@@ -299,7 +334,10 @@ function cameraMove() {
     }
 
     let oldMove = move;
-    if (!activeFree) move += key === 'z' ? -1 : key == 'x' ? 1 : 0;
+    if (!activeFree) {
+      move += slideNav.back.indexOf(key) >= 0 ? -1 : slideNav.next.indexOf(key) >= 0 ? 1 : 0;
+      if (slideNav.home.indexOf(key) >= 0) move = 0;
+    }
 
     if (fixedSwitch || move !== oldMove) {
 

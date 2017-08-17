@@ -10,8 +10,8 @@
   <meta name="viewport" content="width=device-width,shrink-to-fit=no,user-scalable=yes,initial-scale=1,minimum-scale=1,minimal-ui">
   <meta name="apple-mobile-web-app-capable" content="yes" />
 
-  <script src="/js/aframe.min.js"></script>
-  <script src="/js/presentation.js"></script>
+  <script src="js/aframe.min.js"></script>
+  <script src="js/presentation.js"></script>
 </head>
 <body>
 
@@ -29,7 +29,7 @@
     or strap on a VR headset!
   -->
 
-  <a-scene fog="type: exponential; color: #111; density: 0.05;">
+  <a-scene fog="type: exponential; color: #111; density: 0.03;">
 
     <a-assets>
       <img id="sky" src="images/sky.jpg">
@@ -38,15 +38,21 @@
       <img id="floor" src="images/floor.jpg" />
 
       <img id="old-vr" src="images/old-vr.png" />
+      <img id="google-cardboard" src="images/google-cardboard.png" />
+      <img id="google-daydream" src="images/google-daydream.png" />
+      <img id="htc-vive" src="images/htc-vive.png" />
+      <img id="oculus-rift" src="images/oculus-rift.png" />
+      <img id="playstation-vr" src="images/playstation-vr.png" />
+      <img id="samsung-vr" src="images/samsung-vr.png" />
       <img id="aframe" src="images/aframe.png" />
     </a-assets>
 
-    <a-sky src="#sky" theta-length="90" radius="25"></a-sky>
+    <a-sky src="#sky" theta-length="90" radius="40"></a-sky>
 
-    <a-plane src="#floor" rotation="-90 0 0" width="50" height="50"></a-plane>
+    <a-plane src="#floor" rotation="-90 0 0" width="80" height="80"></a-plane>
 
     <a-light type="ambient" color="#fff"></a-light>
-    <a-light type="point" color="#ffc" intensity="0.3" position="0 20 5"></a-light>
+    <a-light type="point" color="#ffc" intensity="1.2" position="0 20 5"></a-light>
 
     <a-camera id="camera-free"></a-camera>
 
