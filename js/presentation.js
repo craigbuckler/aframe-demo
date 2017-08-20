@@ -4,15 +4,6 @@
 const
   slide = [
 
-    /*
-    {
-      title:  '',
-      body:   '',
-      foot:   '',
-      image:  ''
-    },
-    */
-
     {
       title:  'Raise your VR A-game\nwith A-Frame',
       body:   'TechExeter 2017\nCraig Buckler\n@craigbuckler',
@@ -137,8 +128,20 @@ const
     },
 
     {
-      title:  'Demonstration',
-      body:   'You\'re looking at one!\n*** URL-TO-GO-HERE ***'
+      title:  'Demonstrations',
+      body:   'You\'re looking at one!\ncraigbuckler.com/vr/'
+    },
+
+    {
+      title:  'Thank you for watching!',
+      body:   'Craig Buckler\n@craigbuckler\ncraigbuckler.com/vr/',
+      foot:   'github.com/craigbuckler/aframe-demo'
+    },
+
+    {
+      title:  'Any questions?...',
+      body:   'Craig Buckler\n@craigbuckler\ncraigbuckler.com/vr/',
+      foot:   'github.com/craigbuckler/aframe-demo'
     }
 
   ],
@@ -153,7 +156,7 @@ const
     width:    4,      // slide width (meters)
     height:   3,      // slide height
     depth:    0.1,    // slide depth
-    maxX:     5,      // maximum number of slides in horizontal X-axis
+    maxX:     4,      // maximum number of slides in horizontal X-axis
     gapX:     1,      // horizontal gap between slides
     gapZ:     4,      // distance between rows of slides
     color:    '#222'  // slide color
@@ -317,7 +320,7 @@ function cameraMove() {
   document.addEventListener('keyup', keyHandler);
 
   // activate fixed camera
-  keyHandler({ key:'c' });
+  keyHandler({ key: slideNav.switchCam[0] });
 
   // keypress handler
   function keyHandler(e) {

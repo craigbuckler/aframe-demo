@@ -5,7 +5,7 @@ Hi. Thanks for coming
 
 My name's Craig Buckler
 
-This talk is going to show how any of you can start using virtual and augmented reality in your projects today even though it appears to be a huge challenge.
+This talk is going to show how any of you can start using virtual and augmented reality in your projects today even though it appears to be a massive insurmountable challenge.
 
 
 ## 2
@@ -52,7 +52,7 @@ and it wasn't really VR anyway
 
 
 ## 9
-So lets look at the problems for VR.x
+So lets look at the problems for VR
 
 How many of you own...
 
@@ -123,7 +123,7 @@ which we don't need probe too rigourously
 
 
 ## 19
-So let's presume you and your are convinced.
+So let's presume you and your client are convinced.
 
 and you're working for a big estate agent or travel agent
 and you think it'd be great to have 360 degree virtual tours of a house or hotel
@@ -132,7 +132,7 @@ Where do you start?
 
 First, let's face it, VR is difficult.
 
-You need to have 3D expertise, consider lighting, user tracking, frame rates, networking and more
+You need to have appropiate capturing hardware, 3D expertise, consider lighting, user tracking, frame rates, networking and more
 
 then how do you get your system working on all the major devices
 that's tricky when they have different hardware, requirements, platforms and APIs
@@ -140,8 +140,8 @@ that's tricky when they have different hardware, requirements, platforms and API
 then you need to submit your VR app to numerous AppStores with no guarantee of success
 
 and even if you get your VR working on all popular devices
-have you just stopped the large majority of users who don't have a headset from accessing that content
-and there will be people who can't be bothered to strap their headset on?
+have you just stopped the large majority of users who don't have a headset
+or can't be bothered to strap their headset on?
 
 
 ## 20
@@ -211,6 +211,8 @@ and you attach event handlers in JavaScript in the same way you do for any other
 and components can be extended
 there's a registry with libraries for animations, water, physics, motion capture, particles, speech control, text and augmented reality
 
+and it's also tool agnostic so A-frame works with other frameworks
+
 it's fast: they aim for 90 frames per second
 
 the library itself is around a megabyte but gzips to 325KB
@@ -247,13 +249,13 @@ I downloaded this 360 degree image of a famous Exeter landmark from Flickr.
 So the first thing we need is the A-frame library.
 That must go in the HTML head.
 
-We then require a single <a-scene> tag in our body.
-A-frame uses the whole browser screen although you can use it in an iframe.
+We then require a single `<a-scene>` tag in our body.
+A-frame uses the whole browser window although you can use it in an iframe.
 
 Next, we'll define the image within A-frames asset management system.
 This allows A-frame to pre-load and cache assets for better performance.
 
-Next, we can use the <a-sky> entity. This adds a background to our scene.
+Next, we can use the `<a-sky>` entity. This adds a background to our scene.
 It's effectively a sphere with a colour or image mapped onto it.
 
 Now this would work without any other code, but I'm going to add a camera control.
@@ -262,3 +264,98 @@ This will allow the user to look around but not move their position because that
 And that's it!
 Open this in a browser and we can look around.
 Open it on a VR device and you get the full immersive experience.
+
+
+## demo.html
+So let's now build another simple scene.
+
+We'll start with the sky like we saw last time
+then we'll add a floor using an `<a-plane>` tag.
+by default, these are vertical walls, so we need to rotate it by 90 degrees
+
+We can then add a couple of lights.
+A-frame adds a default ambient light anyway but we can change the colour
+and also add other lights to make the scene more interesting.
+
+I'm then going to add a camera
+by default the user starts at co-ordinate 0,0,0 so that's fine
+but we'll add a cursor control to help us focus on individual objects
+
+We can now look at this and see our rudimentary scene.
+
+REFRESH
+
+So lets add a stone cube using the box entity.
+A-frame uses positions entities using an X, Y and Z co-ordinate
+each unit is 1 meter in size
+
+X is the horizontal plane with higher numbers moving items to the right
+Y is the vertical plane with higher numbers moving items up
+Z is the depth.
+since you start at 0,0,0, you can see entities with a negative Z value
+those with a positive Z value are behind you.
+
+So we'll create a stone box which is 2 meters in size
+I could do that by setting the width, height and depth but I'm going to use a scale instead because it'll give us some advantages in a moment
+
+The centre of that box will be positioned at 0, 1, -5 so it's directly in front of us
+
+REFRESH
+
+One interesting feature of A-frame is that we can place entities inside the tag of another.
+Each of those child entities inherits some of the properties of its parent such as the position, size and rotation.
+
+So let's add some text on the front face.
+The position is 0.5 of a meter from the centre of the box.
+But because the box is scaled by 2, this will resolve to 1 meter.
+
+REFRESH
+
+So let's now add a red ball on top of our box
+This is red with a 0.5 meter radius which will be multipled by 2 because of our box scale
+
+and we'll also specify an animation entity to make it bounce up and down.
+
+REFRESH
+
+What I want to do now is enlarge the size of any entity when I point at it using the cursor
+
+You could do that with a standard JavaScript event handler which changed the scale attribute
+
+But because we may want to apply this functionality to any element in our scene, I've created an A-frame component to do just that.
+
+This defines a default scale and two event handlers.
+The first records the current scale of the object then applies the new scale when the cursor moves onto the object
+The second returns it back to the old scale when the cursor moves off
+
+This code effectively does the same thing but it then means we can apply it using an HTML attribute.
+
+REFRESH
+
+We can now see our ball enlarges in size when we hover over it.
+
+
+## presentation.html
+I won't go into too many details about the presentation itself because we'll be here all day.
+
+But there's a basic scene with lighting and two cameras defined.
+The first is one which allows the user to move around
+and the second is fixed
+
+The slide content is defined in `presentation.js` within an array of objects.
+
+There are then a series of other configurations which define things such as the slide block sizes, gaps, colours, fonts and other factors.
+
+Then there are just two functions:
+
+1. makeSlides creates the slide entities from the data, and
+1. cameraMove handles the events. It switches between the cameras. If the fixed camera is selected, it adds an animation to move to the next or previous slide when a key is pressed.
+
+
+## ar.js
+[ ASK EVERYONE TO VISIT ar.html, SHOW hiro.html ]
+
+Finally, we can create augmented reality using A-frame and ar.js which is an augmented reality library for detecting certain patterns and positioning entities.
+
+In this demonstration, I've simply create an animated box with some text
+which appears when this pattern is seen by the camera.

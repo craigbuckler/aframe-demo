@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>A-Frame demonstration: Exeter</title>
+
+  <meta name="description" content="VR/AR demonstrations using A-Frame" />
+  <meta name="author" content="Craig Buckler" />
+
+  <meta name="viewport" content="width=device-width,shrink-to-fit=no,user-scalable=yes,initial-scale=1,minimum-scale=1,minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <script src="js/aframe.min.js"></script>
+  <script src="js/ar.min.js"></script>
+</head>
+<body>
+
+  <a-scene embedded artoolkit="sourceType:webcam;">
+
+    <a-box position="0 0.5 0" color="#4cba3c" material="opacity:0.8;">
+
+      <a-text value="TECH\nEXE\nTER_" font="aileronsemibold" color="#fff" scale="1.3 1.3 1.3" position="-0.4 0.55 0" rotation="-90 0 0" align="left" baseline="center"></a-text>
+
+      <a-animation attribute="rotation" from="0 0 0" to="360 0 0" easing="ease-back" direction="alternate" dur="2000" repeat="indefinite"></a-animation>
+
+    </a-box>
+
+    <a-marker-camera preset="hiro"></a-marker-camera>
+
+  </a-scene>
+
+</body>
+</html>
