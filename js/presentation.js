@@ -31,7 +31,7 @@ const
     },
 
     {
-      body:   'Virtual Reality and\nAugemented Reality\nare on the cusp of\nmainstream adoption',
+      body:   'Virtual Reality and\nAugmented Reality\nare on the cusp of\nmainstream adoption',
     },
 
     {
