@@ -4,6 +4,13 @@ author: Craig Buckler
 epub: https://convertfiles.online/convert/md/epub
 ---
 
+* images/exeter.jpg
+* exeter.html
+* demo.html
+* js/demo.js
+* presentation.html
+* js/presentation.js
+
 # 1
 
 Hi. Thanks for coming
@@ -61,10 +68,12 @@ like they have been for 30 years - if not longer
 
 anyone recognise these.
 
-## Sega VR
+**Sega VR**
+
 they announced their device in 1991 but it was never released
 
-## Nintendo Virtual Boy
+**Nintendo Virtual Boy**
+
 This lasted about a year and has been airbrushed out of Nintendo history and it wasn't really VR anyway
 
 
@@ -391,8 +400,8 @@ But because we may want to apply this functionality to any element in our scene,
 
 This defines a default scale and two event handlers.
 
-* The mouseenter event records the current scale of the object then applies the new scale
-* The mouseleave event second returns it back to it's original scale
+* The **mouseenter** event records the current scale of the object then applies the new scale
+* The **mouseleave** event second returns it back to it's original scale
 
 This component can then be applied to any entity using an HTML attribute.
 
@@ -439,19 +448,14 @@ This has been integrated with A-frame and it doesn't require markers - you can u
 
 # 27
 
-I hope I've demonstrated that VR and AR need not be complex.
+I hope I've demonstrated that cross-device VR and AR need not be complex or expensive to start using today.
+
+Links to this presentation, the code and resources can be found here.
+
+My contact details are at craigbuckler.com or catch me later today.
 
 Thanks for coming along.
 
 And thanks also to Kris, Rob and the team for organising another great conference.
-
-You can contact me on Twitter or email.
-
-The demonstration can be viewed online.
-
-And the code's available on GitHub.
-
-
-# 28
 
 Do we have time for questions?

@@ -134,13 +134,7 @@ const
 
     {
       title:  'Thank you for watching!',
-      body:   'Craig Buckler\n@craigbuckler\ncraigbuckler.com/vr/',
-      foot:   'github.com/craigbuckler/aframe-demo'
-    },
-
-    {
-      title:  'Any questions?...',
-      body:   'Craig Buckler\n@craigbuckler\ncraigbuckler.com/vr/',
+      body:   'craigbuckler.com/vr/\n@craigbuckler',
       foot:   'github.com/craigbuckler/aframe-demo'
     }
 
